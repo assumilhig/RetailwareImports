@@ -1,0 +1,13 @@
+C:\shared\sourceCodes\RetailwareImports\RetailwareImports\bin\Debug\RetailwareImports.exe
+C:\shared\sourceCodes\RetailwareImports\RetailwareImports\bin\Debug\RetailwareImports.pdb
+C:\shared\sourceCodes\RetailwareImports\RetailwareImports\bin\Debug\RetailwareImports.xml
+C:\shared\sourceCodes\RetailwareImports\RetailwareImports\bin\Debug\adodb.dll
+C:\shared\sourceCodes\RetailwareImports\RetailwareImports\obj\Debug\ResolveAssemblyReference.cache
+C:\shared\sourceCodes\RetailwareImports\RetailwareImports\obj\Debug\RetailwareImports.frmImportNewItems.resources
+C:\shared\sourceCodes\RetailwareImports\RetailwareImports\obj\Debug\RetailwareImports.frmLogin.resources
+C:\shared\sourceCodes\RetailwareImports\RetailwareImports\obj\Debug\RetailwareImports.frmMain.resources
+C:\shared\sourceCodes\RetailwareImports\RetailwareImports\obj\Debug\RetailwareImports.Resources.resources
+C:\shared\sourceCodes\RetailwareImports\RetailwareImports\obj\Debug\RetailwareImports.vbproj.GenerateResource.Cache
+C:\shared\sourceCodes\RetailwareImports\RetailwareImports\obj\Debug\RetailwareImports.exe
+C:\shared\sourceCodes\RetailwareImports\RetailwareImports\obj\Debug\RetailwareImports.xml
+C:\shared\sourceCodes\RetailwareImports\RetailwareImports\obj\Debug\RetailwareImports.pdb
