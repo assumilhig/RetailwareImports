@@ -1,7 +1,5 @@
 ﻿Public Class frmLogin
     Public sSql As String
-    Public rsLogin As New ADODB.Recordset
-    Public rsConfiguration As New ADODB.Recordset
 
     Private Sub frmLogin_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 

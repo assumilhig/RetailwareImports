@@ -8,9 +8,75 @@ Public Class frmImportNewItems
 
         Me.Text = String.Format("Import New Items - Utility - {0} Version {1}", My.Application.Info.ProductName, My.Application.Info.Version.ToString)
 
-        autoCreateTables()
+        Try
+            sSql = "CREATE TABLE [dbo].[ImportNewItems]( " & _
+                "[ID] [bigint] NULL, " & _
+                "[Itemcode] [nvarchar](100) NULL, " & _
+                "[Description] [nvarchar](500) NULL, " & _
+                "[ExtendedDesc] [nvarchar](500) NULL, " & _
+                "[Department] [nvarchar](500) NULL, " & _
+                "[Category] [nvarchar](250) NULL, " & _
+                "[SubCategory] [nvarchar](250) NULL, " & _
+                "[Price] [money] NULL, " & _
+                "[PriceA] [money] NULL, " & _
+                "[PriceB] [money] NULL, " & _
+                "[PriceC] [money] NULL, " & _
+                "[SCFlag] [smallint] NULL, " & _
+                "[RUOM] [nvarchar](100) NULL, " & _
+                "[Taxable] [varchar](3) NULL, " & _
+                "[PackingQty] [float] NULL, " & _
+                "[WUOM] [nvarchar](100) NULL, " & _
+                "[DepartmentID] [int] NULL, " & _
+                "[CategoryID] [int] NULL, " & _
+                "[SubCategoryID] [int] NULL " & _
+            ") ON [PRIMARY]"
+            cnn.Execute(sSql)
+        Catch ex As Exception
+        End Try
 
-        autoCreateProcedures()
+        Try
+            sSql = "CREATE TABLE [dbo].[ImportNewItemFindings]( " & _
+                "[Code] [nvarchar](100) NULL, " & _
+                "[Validation] [nvarchar](100) NULL, " & _
+                "[Result] [float] NULL, " & _
+                "[Error] [int] NULL " & _
+                ") ON [PRIMARY]"
+            cnn.Execute(sSql)
+        Catch ex As Exception
+        End Try
+
+        Try
+            cnn.Execute("DROP PROCEDURE Proc_Import_NewItems")
+        Catch ex As Exception
+        End Try
+
+        Try
+            Dim Proc_Import_NewItems As String = My.Resources.Proc_Import_NewItems.ToString()
+            cnn.Execute(Proc_Import_NewItems)
+        Catch ex As Exception
+        End Try
+
+        Try
+            cnn.Execute("DROP PROCEDURE Proc_Import_NewItemsValidate")
+        Catch ex As Exception
+        End Try
+
+        Try
+            Dim Proc_Import_NewItemsValidate As String = My.Resources.Proc_Import_NewItemsValidate.ToString()
+            cnn.Execute(Proc_Import_NewItemsValidate)
+        Catch ex As Exception
+        End Try
+
+        Try
+            cnn.Execute("DROP PROCEDURE Proc_Import_NewItemsProcess")
+        Catch ex As Exception
+        End Try
+
+        Try
+            Dim Proc_Import_NewItemsProcess As String = My.Resources.Proc_Import_NewItemsProcess.ToString()
+            cnn.Execute(Proc_Import_NewItemsProcess)
+        Catch ex As Exception
+        End Try
 
         ValidateNewItems()
 
@@ -155,6 +221,7 @@ Public Class frmImportNewItems
             Label4.Text = "Record Count : " & CDbl(DataGridView1.Rows.Count).ToString("#,##0")
 
         Catch ex As Exception
+            MsgBox(ex.Message, MsgBoxStyle.Exclamation, "Message")
         End Try
     End Sub
 
@@ -176,6 +243,7 @@ Public Class frmImportNewItems
             End With
             Label5.Text = "Record Count : " & CDbl(DataGridView2.Rows.Count).ToString("#,##0")
         Catch ex As Exception
+            MsgBox(ex.Message, MsgBoxStyle.Exclamation, "Message")
         End Try
     End Sub
 
@@ -195,6 +263,7 @@ Public Class frmImportNewItems
             End With
             Label6.Text = "Record Count : " & CDbl(DataGridView3.Rows.Count).ToString("#,##0")
         Catch ex As Exception
+            MsgBox(ex.Message, MsgBoxStyle.Exclamation, "Message")
         End Try
     End Sub
 
@@ -214,6 +283,7 @@ Public Class frmImportNewItems
             End With
             Label7.Text = "Record Count : " & CDbl(DataGridView4.Rows.Count).ToString("#,##0")
         Catch ex As Exception
+            MsgBox(ex.Message, MsgBoxStyle.Exclamation, "Message")
         End Try
     End Sub
 
@@ -248,6 +318,7 @@ Public Class frmImportNewItems
                 DataGridView2.ReadOnly = True
 
             Catch ex As Exception
+                MsgBox(ex.Message, MsgBoxStyle.Exclamation, "Message")
             End Try
         End If
     End Sub
@@ -272,6 +343,7 @@ Public Class frmImportNewItems
                     ValidateNewItems()
 
                 Catch ex As Exception
+                    MsgBox(ex.Message, MsgBoxStyle.Exclamation, "Message")
                 End Try
 
                 LinkLabel2.Text = "Edit"
@@ -337,6 +409,7 @@ Public Class frmImportNewItems
             UpdateButtonStatus()
 
         Catch ex As Exception
+            MsgBox(ex.Message, MsgBoxStyle.Exclamation, "Message")
         End Try
     End Sub
 
@@ -440,68 +513,6 @@ Public Class frmImportNewItems
         End Try
     End Sub
 
-    Private Sub autoCreateTables()
-        Try
-            sSql = "CREATE TABLE [dbo].[ImportNewItems]( " & _
-                "[ID] [bigint] NULL, " & _
-                "[Itemcode] [nvarchar](100) NULL, " & _
-                "[Description] [nvarchar](500) NULL, " & _
-                "[ExtendedDesc] [nvarchar](500) NULL, " & _
-                "[Department] [nvarchar](500) NULL, " & _
-                "[Category] [nvarchar](250) NULL, " & _
-                "[SubCategory] [nvarchar](250) NULL, " & _
-                "[Price] [money] NULL, " & _
-                "[PriceA] [money] NULL, " & _
-                "[PriceB] [money] NULL, " & _
-                "[PriceC] [money] NULL, " & _
-                "[SCFlag] [smallint] NULL, " & _
-                "[RUOM] [nvarchar](100) NULL, " & _
-                "[Taxable] [varchar](3) NULL, " & _
-                "[PackingQty] [float] NULL, " & _
-                "[WUOM] [nvarchar](100) NULL, " & _
-                "[DepartmentID] [int] NULL, " & _
-                "[CategoryID] [int] NULL, " & _
-                "[SubCategoryID] [int] NULL " & _
-            ") ON [PRIMARY]"
-        Catch ex As Exception
-        End Try
-
-        Try
-            sSql = "CREATE TABLE [dbo].[ImportNewItemFindings]( " & _
-                "[Code] [nvarchar](100) NULL, " & _
-                "[Validation] [nvarchar](100) NULL, " & _
-                "[Result] [float] NULL, " & _
-                "[Error] [int] NULL " & _
-                ") ON [PRIMARY]"
-            cnn.Execute(sSql)
-        Catch ex As Exception
-        End Try
-    End Sub
-
-    Private Sub autoCreateProcedures()
-        Try
-
-            Dim Proc_Import_NewItems As String = My.Resources.Proc_Import_NewItems.ToString()
-            cnn.Execute(Proc_Import_NewItems)
-        Catch ex As Exception
-        End Try
-
-        Try
-
-            Dim Proc_Import_NewItemsValidate As String = My.Resources.Proc_Import_NewItemsValidate.ToString()
-            cnn.Execute(Proc_Import_NewItemsValidate)
-        Catch ex As Exception
-        End Try
-
-        Try
-
-            Dim Proc_Import_NewItemsProcess As String = My.Resources.Proc_Import_NewItemsProcess.ToString()
-            cnn.Execute(Proc_Import_NewItemsProcess)
-        Catch ex As Exception
-        End Try
-
-    End Sub
-
     Private Sub UpdateButtonStatus()
         Try
             Dim rs As New ADODB.Recordset
@@ -516,6 +527,7 @@ Public Class frmImportNewItems
                 btnUpdateDatabase.Enabled = True
             End If
         Catch ex As Exception
+            MsgBox(ex.Message, MsgBoxStyle.Exclamation, "Message")
         End Try
     End Sub
 
@@ -561,6 +573,7 @@ Public Class frmImportNewItems
                     Next
 
                 Catch ex As Exception
+                    MsgBox(ex.Message, MsgBoxStyle.Exclamation, "Message")
                 End Try
 
                 Try
@@ -592,7 +605,6 @@ Public Class frmImportNewItems
             MsgBox("Database has been updated with new items.", MsgBoxStyle.Information, "Import New Item")
 
             Me.Dispose()
-            frmMain.ShowDialog()
         Catch ex As Exception
             MsgBox(ex.Message, MsgBoxStyle.Exclamation, "Message")
         End Try

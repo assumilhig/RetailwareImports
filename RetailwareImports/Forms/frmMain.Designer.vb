@@ -24,6 +24,8 @@ Partial Class frmMain
     Private Sub InitializeComponent()
         Me.btnImportNewItems = New System.Windows.Forms.Button
         Me.btnExit = New System.Windows.Forms.Button
+        Me.btnTableManagement = New System.Windows.Forms.Button
+        Me.btnReprintReading = New System.Windows.Forms.Button
         Me.SuspendLayout()
         '
         'btnImportNewItems
@@ -46,11 +48,33 @@ Partial Class frmMain
         Me.btnExit.Text = "&Exit"
         Me.btnExit.UseVisualStyleBackColor = True
         '
+        'btnTableManagement
+        '
+        Me.btnTableManagement.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnTableManagement.Location = New System.Drawing.Point(153, 12)
+        Me.btnTableManagement.Name = "btnTableManagement"
+        Me.btnTableManagement.Size = New System.Drawing.Size(135, 38)
+        Me.btnTableManagement.TabIndex = 2
+        Me.btnTableManagement.Text = "&Table Management"
+        Me.btnTableManagement.UseVisualStyleBackColor = True
+        '
+        'btnReprintReading
+        '
+        Me.btnReprintReading.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnReprintReading.Location = New System.Drawing.Point(294, 12)
+        Me.btnReprintReading.Name = "btnReprintReading"
+        Me.btnReprintReading.Size = New System.Drawing.Size(178, 38)
+        Me.btnReprintReading.TabIndex = 3
+        Me.btnReprintReading.Text = "New &Reprint Reading"
+        Me.btnReprintReading.UseVisualStyleBackColor = True
+        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(484, 236)
+        Me.Controls.Add(Me.btnReprintReading)
+        Me.Controls.Add(Me.btnTableManagement)
         Me.Controls.Add(Me.btnExit)
         Me.Controls.Add(Me.btnImportNewItems)
         Me.MaximizeBox = False
@@ -64,4 +88,6 @@ Partial Class frmMain
     End Sub
     Friend WithEvents btnImportNewItems As System.Windows.Forms.Button
     Friend WithEvents btnExit As System.Windows.Forms.Button
+    Friend WithEvents btnTableManagement As System.Windows.Forms.Button
+    Friend WithEvents btnReprintReading As System.Windows.Forms.Button
 End Class

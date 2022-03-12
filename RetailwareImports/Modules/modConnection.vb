@@ -3,6 +3,8 @@
 Module modConnection
 
     Public cnn As New ADODB.Connection
+    Public rsLogin As New ADODB.Recordset
+    Public rsConfiguration As New ADODB.Recordset
     'Public con As SqlConnection
 
     Public Sub Connect()

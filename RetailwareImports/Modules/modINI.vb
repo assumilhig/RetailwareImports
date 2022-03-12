@@ -5,6 +5,8 @@
 
     Private Const INI_FILE = "\RW_Config.INI"
 
+    Public sRegisterNo As String = ""
+
     Public strOnlineServerName As String
     Public strOnlineDatabase As String
     Public strOnlineUserName As String
@@ -13,13 +15,24 @@
 
     Public strUseTouchScreen As String = "No"
 
+    Public UseDefaultReadingPrintOut As String = "Yes"
+
+    Public LayoutPath As String = ""
+    Public UseStandardTableManagement As String = "Yes"
+
+    Public sStarttime As String = "06:00:00.000"
+    Public sEndtime As String = "05:59:59.000"
+
+    Public FileExtension As String = "rws"
+    Public FileSave As String = "no"
+
     Public Sub ReadINIFile()
         Try
-
             Dim fsoINI As Object
             fsoINI = CreateObject("Scripting.FilesystemObject")
 
             If fsoINI.FileExists(Application.StartupPath & INI_FILE) Then
+                sRegisterNo = INIRead(Application.StartupPath & INI_FILE, "Register", "RegisterNo", "0")
 
                 strOnlineServerName = INIRead(Application.StartupPath & INI_FILE, "Online_Database", "Online_Server", "Unknown")
                 strOnlineDatabase = INIRead(Application.StartupPath & INI_FILE, "Online_Database", "Online_Database", "Unknown")
@@ -29,6 +42,16 @@
 
                 strUseTouchScreen = INIRead(Application.StartupPath & INI_FILE, "ScreenMode", "UseTouchScreen", "No")
 
+                UseStandardTableManagement = INIRead(Application.StartupPath & INI_FILE, "Resto", "UseStandardTableManagement", "yes")
+                LayoutPath = INIRead(Application.StartupPath & INI_FILE, "Resto", "LayoutPath", "")
+
+                sStarttime = INIRead(Application.StartupPath & INI_FILE, "POSReading", "StartTime", "06:00:00.000")
+                sEndtime = INIRead(Application.StartupPath & INI_FILE, "POSReading", "EndTime", "05:59:59.000")
+
+                FileExtension = INIRead(Application.StartupPath & INI_FILE, "Others", "FileExtension", "rws")
+                FileSave = INIRead(Application.StartupPath & INI_FILE, "Others", "FileSave", "no")
+
+                UseDefaultReadingPrintOut = INIRead(Application.StartupPath & INI_FILE, "Reading", "UseDefaultReadingPrintOut", "yes")
             End If
 
         Catch ex As Exception

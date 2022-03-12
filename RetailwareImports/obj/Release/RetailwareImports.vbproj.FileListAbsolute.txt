@@ -6,6 +6,10 @@ C:\shared\sourceCodes\RetailwareImports\RetailwareImports\obj\Release\ResolveAss
 C:\shared\sourceCodes\RetailwareImports\RetailwareImports\obj\Release\RetailwareImports.frmImportNewItems.resources
 C:\shared\sourceCodes\RetailwareImports\RetailwareImports\obj\Release\RetailwareImports.frmLogin.resources
 C:\shared\sourceCodes\RetailwareImports\RetailwareImports\obj\Release\RetailwareImports.frmMain.resources
+C:\shared\sourceCodes\RetailwareImports\RetailwareImports\obj\Release\RetailwareImports.frmReprintReading.resources
+C:\shared\sourceCodes\RetailwareImports\RetailwareImports\obj\Release\RetailwareImports.frmAddEditArea.resources
+C:\shared\sourceCodes\RetailwareImports\RetailwareImports\obj\Release\RetailwareImports.frmAddEditTable.resources
+C:\shared\sourceCodes\RetailwareImports\RetailwareImports\obj\Release\RetailwareImports.frmTableManagement.resources
 C:\shared\sourceCodes\RetailwareImports\RetailwareImports\obj\Release\RetailwareImports.Resources.resources
 C:\shared\sourceCodes\RetailwareImports\RetailwareImports\obj\Release\RetailwareImports.vbproj.GenerateResource.Cache
 C:\shared\sourceCodes\RetailwareImports\RetailwareImports\obj\Release\RetailwareImports.exe

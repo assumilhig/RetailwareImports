@@ -7,18 +7,17 @@ Module modHelpers
         Return Path.GetFileNameWithoutExtension(strFilename) & "_" & DateTime.Now.ToString("yyyyMMdd_HHmmss") & Path.GetExtension(strFilename)
     End Function
 
-    Public Function EnsureDirectoryExist(ByVal name As String)
+    Public Function EnsureDirectoryExist(ByVal Path As String)
 
-        If Not System.IO.Directory.Exists(name) Then
-            System.IO.Directory.CreateDirectory(name)
+        If Not System.IO.Directory.Exists(Path) Then
+            System.IO.Directory.CreateDirectory(Path)
         End If
 
-        Return name
+        Return Path
     End Function
 
     Public Function TrimToLower(ByVal text As String)
-
-        Return Trim(text).ToLower
+        Return text.Trim.ToLower
     End Function
 
     Public Sub LoadDataGridView(ByVal sql As String, ByRef grid As DataGridView)
