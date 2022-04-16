@@ -119,9 +119,7 @@ Public Class frmAddEditTable
                     cnn.Execute(sSQL)
 
                     frmTableManagement.CreateTableButton(tableName, 10, 10, CDbl(width), CDbl(height), newfilename)
-
                 Else
-
                     If Not fromTableName = tableName Then
                         If Not rsCheckName.EOF Then
                             MsgBox("Table Name already exist! Please use another name.", MsgBoxStyle.Exclamation, "Validation")
@@ -169,7 +167,6 @@ Public Class frmAddEditTable
                         newfilename = ""
                     Else
                         newfilename = LayoutPath & "\Table\" & tableID & ".png"
-
                         My.Computer.FileSystem.CopyFile(toControlLayout, newfilename, True)
                     End If
 
@@ -178,9 +175,7 @@ Public Class frmAddEditTable
 
                     frmTableManagement.GenerateTableButton(areaID)
                 End If
-
             Next
-            
             Me.Dispose()
         Catch ex As Exception
             MsgBox(ex.Message, MsgBoxStyle.Critical, "Message")
@@ -231,7 +226,6 @@ Public Class frmAddEditTable
             Else
                 cbInactive.Checked = True
             End If
-
         Catch ex As Exception
             MsgBox(ex.Message, MsgBoxStyle.Critical, "Message")
         End Try

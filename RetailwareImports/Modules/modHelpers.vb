@@ -3,12 +3,10 @@
 Module modHelpers
 
     Public Function RenameFilename(ByVal strFilename As String)
-
         Return Path.GetFileNameWithoutExtension(strFilename) & "_" & DateTime.Now.ToString("yyyyMMdd_HHmmss") & Path.GetExtension(strFilename)
     End Function
 
     Public Function EnsureDirectoryExist(ByVal Path As String)
-
         If Not System.IO.Directory.Exists(Path) Then
             System.IO.Directory.CreateDirectory(Path)
         End If
@@ -21,7 +19,6 @@ Module modHelpers
     End Function
 
     Public Sub LoadDataGridView(ByVal sql As String, ByRef grid As DataGridView)
-
         Dim da As New System.Data.OleDb.OleDbDataAdapter()
         Dim ds As New DataSet
         Dim rsRecordset As New ADODB.Recordset

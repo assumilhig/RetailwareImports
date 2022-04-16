@@ -1,24 +1,21 @@
 ﻿Public Class frmLogin
+
     Public sSql As String
 
     Private Sub frmLogin_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-
         Me.Text = String.Format("Login - {0} Version {1}", My.Application.Info.ProductName, My.Application.Info.Version.ToString)
         Connect()
     End Sub
 
     Private Sub btnCancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCancel.Click
-
         Application.Exit()
     End Sub
 
     Private Sub btnLogin_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnLogin.Click
-
         Login()
     End Sub
 
     Private Sub Login()
-
         Try
             sSql = "SELECT TOP 1 * FROM Configuration"
             If rsConfiguration.State = 1 Then rsConfiguration.Close()

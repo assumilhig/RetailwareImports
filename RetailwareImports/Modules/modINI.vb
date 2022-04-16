@@ -32,26 +32,26 @@
             fsoINI = CreateObject("Scripting.FilesystemObject")
 
             If fsoINI.FileExists(Application.StartupPath & INI_FILE) Then
-                sRegisterNo = INIRead(Application.StartupPath & INI_FILE, "Register", "RegisterNo", "0")
+                sRegisterNo = INIRead("Register", "RegisterNo", "0")
 
-                strOnlineServerName = INIRead(Application.StartupPath & INI_FILE, "Online_Database", "Online_Server", "Unknown")
-                strOnlineDatabase = INIRead(Application.StartupPath & INI_FILE, "Online_Database", "Online_Database", "Unknown")
-                strOnlineUserName = INIRead(Application.StartupPath & INI_FILE, "Online_Database", "Online_USerName", "Unknown")
-                strOnlinePassword = INIRead(Application.StartupPath & INI_FILE, "Online_Database", "Online_Password", "Unknown")
-                strOnlineTimeout = INIRead(Application.StartupPath & INI_FILE, "Online_Database", "Online_Timeout ", "Unknown")
+                strOnlineServerName = INIRead("Online_Database", "Online_Server", "Unknown")
+                strOnlineDatabase = INIRead("Online_Database", "Online_Database", "Unknown")
+                strOnlineUserName = INIRead("Online_Database", "Online_USerName", "Unknown")
+                strOnlinePassword = INIRead("Online_Database", "Online_Password", "Unknown")
+                strOnlineTimeout = INIRead("Online_Database", "Online_Timeout ", "Unknown")
 
-                strUseTouchScreen = INIRead(Application.StartupPath & INI_FILE, "ScreenMode", "UseTouchScreen", "No")
+                strUseTouchScreen = INIRead("ScreenMode", "UseTouchScreen", "No")
 
-                UseStandardTableManagement = INIRead(Application.StartupPath & INI_FILE, "Resto", "UseStandardTableManagement", "yes")
-                LayoutPath = INIRead(Application.StartupPath & INI_FILE, "Resto", "LayoutPath", "")
+                UseStandardTableManagement = INIRead("Resto", "UseStandardTableManagement", "yes")
+                LayoutPath = INIRead("Resto", "LayoutPath", "")
 
-                sStarttime = INIRead(Application.StartupPath & INI_FILE, "POSReading", "StartTime", "06:00:00.000")
-                sEndtime = INIRead(Application.StartupPath & INI_FILE, "POSReading", "EndTime", "05:59:59.000")
+                sStarttime = INIRead("POSReading", "StartTime", "06:00:00.000")
+                sEndtime = INIRead("POSReading", "EndTime", "05:59:59.000")
 
-                FileExtension = INIRead(Application.StartupPath & INI_FILE, "Others", "FileExtension", "rws")
-                FileSave = INIRead(Application.StartupPath & INI_FILE, "Others", "FileSave", "no")
+                FileExtension = INIRead("Others", "FileExtension", "rws")
+                FileSave = INIRead("Others", "FileSave", "no")
 
-                UseDefaultReadingPrintOut = INIRead(Application.StartupPath & INI_FILE, "Reading", "UseDefaultReadingPrintOut", "yes")
+                UseDefaultReadingPrintOut = INIRead("Reading", "UseDefaultReadingPrintOut", "yes")
             End If
 
         Catch ex As Exception
@@ -59,13 +59,13 @@
         End Try
     End Sub
 
-    Public Function INIRead(ByVal INIPath As String, ByVal SectionName As String, ByVal KeyName As String, ByVal DefaultValue As String) As String
+    Public Function INIRead(ByVal SectionName As String, ByVal KeyName As String, ByVal DefaultValue As String) As String
         ' primary version of call gets single value given all parameters 
         Dim n As Int32
         Dim sData As String
         sData = Space$(1024) ' allocate some room 
         n = GetPrivateProfileString(SectionName, KeyName, DefaultValue, _
-        sData, sData.Length, INIPath)
+        sData, sData.Length, Application.StartupPath & INI_FILE)
         If n > 0 Then ' return whatever it gave us 
             INIRead = sData.Substring(0, n)
         Else

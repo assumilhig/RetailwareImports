@@ -16,7 +16,6 @@ Public Class frmTableManagement
     Dim panelY As Integer
 
     Private Sub frmTableManagement_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-
         If LayoutPath = "" Then
             LayoutPath = Application.StartupPath & "\Resources\TableManagement\"
         End If
@@ -41,7 +40,6 @@ Public Class frmTableManagement
         If Not firstArea = "" Then SelectArea(firstArea)
         EnableEditControl(False)
 
-
         Try
             sSQL = "CREATE TABLE TransactionHoldNoPC ([TableNo] [nvarchar](10))"
             cnn.Execute(sSQL)
@@ -49,13 +47,11 @@ Public Class frmTableManagement
         End Try
     End Sub
 
-
     Private Sub frmTableManagementUI_Paint(ByVal sender As Object, ByVal e As System.Windows.Forms.PaintEventArgs) Handles Me.Paint
         Dim targetRect As New Rectangle(0, 0, Me.Width, Me.Height)
         Dim brush As New System.Drawing.Drawing2D.LinearGradientBrush(targetRect, Color.RoyalBlue, Color.White, Drawing2D.LinearGradientMode.Vertical)
         e.Graphics.FillRectangle(brush, targetRect)
     End Sub
-
 
     Private Sub btnClose_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnClose.Click
         Me.Dispose()
@@ -164,11 +160,9 @@ Public Class frmTableManagement
     Private Sub btnRemoveTable_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnRemoveTable.Click
         Try
             If Me.Panel1.Controls.Count > 0 Then
-
                 Dim areaID As Double = 0
 
                 For Each btn As Button In Me.Panel1.Controls
-
                     If areaID = 0 Then
                         Dim rsAreaID As New ADODB.Recordset
                         sSQL = "SELECT AreaID FROM TM_Tables WHERE Name = '" & btn.Text & "' GROUP BY AreaID"
@@ -183,6 +177,7 @@ Public Class frmTableManagement
                         cnn.Execute(sSQL)
                     End If
                 Next
+
                 firstArea = ""
                 selectedControl = ""
                 firstSelectedArea = ""
@@ -212,7 +207,6 @@ Public Class frmTableManagement
 
             If Not rsArea.EOF Then
                 While Not rsArea.EOF
-
                     If inEditMode = False Then
                         If IsDBNull(rsArea.Fields("Terminals").Value) Or Trim(rsArea.Fields("Terminals").Value) = "" Then
                             If firstArea = "" Then
@@ -227,13 +221,11 @@ Public Class frmTableManagement
                             Dim x As String = Trim(sRegisterNo)
 
                             If xd.Contains(x) Then
-
                                 If firstArea = "" Then
                                     firstArea = rsArea.Fields("Name").Value
                                 End If
 
                                 CreateAreaButton(rsArea.Fields("Name").Value)
-
                             End If
                         End If
                     Else
@@ -243,7 +235,6 @@ Public Class frmTableManagement
 
                         CreateAreaButton(rsArea.Fields("Name").Value)
                     End If
-
                     rsArea.MoveNext()
                 End While
             End If
@@ -282,7 +273,6 @@ Public Class frmTableManagement
     End Sub
 
     Public Sub GenerateTableButton(ByVal areaID As Integer)
-
         Try
             Me.Panel1.Controls.Clear()
 
@@ -299,9 +289,7 @@ Public Class frmTableManagement
 
             If Not rsTables.EOF Then
                 While Not rsTables.EOF
-
-                    CreateTableButton(rsTables.Fields("Name").Value, rsTables.Fields("LocationX").Value, rsTables.Fields("LocationY").Value, _
-                                      rsTables.Fields("SizeW").Value, rsTables.Fields("SizeH").Value, rsTables.Fields("ImagePath").Value)
+                    CreateTableButton(rsTables.Fields("Name").Value, rsTables.Fields("LocationX").Value, rsTables.Fields("LocationY").Value, rsTables.Fields("SizeW").Value, rsTables.Fields("SizeH").Value, rsTables.Fields("ImagePath").Value)
 
                     rsTables.MoveNext()
                 End While
@@ -311,8 +299,7 @@ Public Class frmTableManagement
         End Try
     End Sub
 
-    Public Sub CreateTableButton(ByVal tableName As String, ByVal x As Double, ByVal y As Double, _
-                                 ByVal width As Double, ByVal height As Double, ByVal imagePath As String)
+    Public Sub CreateTableButton(ByVal tableName As String, ByVal x As Double, ByVal y As Double, ByVal width As Double, ByVal height As Double, ByVal imagePath As String)
         Try
             Dim newTable As New Button
             Dim newBold As New Font(newTable.Font.FontFamily, newTable.Font.Size, FontStyle.Bold)
@@ -344,7 +331,6 @@ Public Class frmTableManagement
             If btnClose.Text = "Close" Then
                 editMode = False
             End If
-
         Catch ex As Exception
             MsgBox(ex.Message, MsgBoxStyle.Critical, "Message")
         End Try
@@ -363,11 +349,9 @@ Public Class frmTableManagement
     Private Sub AreaButton_MouseDown(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs)
         Try
             If e.Clicks = 2 Then
-
                 Dim areaName As String = Trim(CType(CType(sender, System.Windows.Forms.Button).Text, String))
 
                 If inEditMode = True Then
-
                     With frmAddEditArea
                         .Text = "Edit Area"
                         .txtName.Text = areaName
@@ -388,7 +372,6 @@ Public Class frmTableManagement
             Dim tableName As String = Trim(CType(CType(sender, System.Windows.Forms.Button).Text, String))
 
             If inEditMode = True Then
-
                 If tableName.Contains(",") Then
                     MsgBox("Selected Table is currently joined to other table(s)!" & vbCrLf & _
                            "Detached this table first before editing.", MsgBoxStyle.Exclamation, "Message")
@@ -405,10 +388,7 @@ Public Class frmTableManagement
                         btn.FlatAppearance.BorderColor = Color.Black
                     End If
                 Next
-
             Else
-
-
                 For Each btn As Button In Me.Panel1.Controls
                     If btn.Text = tableName Then
 
@@ -422,9 +402,7 @@ Public Class frmTableManagement
                         btn.FlatAppearance.BorderSize = 0
                     End If
                 Next
-
             End If
-
         Catch ex As Exception
             MsgBox(ex.Message, MsgBoxStyle.Critical, "Message")
         End Try
@@ -432,9 +410,7 @@ Public Class frmTableManagement
 
     Private Sub TableButton_MouseDown(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs)
         Try
-
             If e.Clicks = 2 Then
-
                 Dim tableName As String = Trim(CType(CType(sender, System.Windows.Forms.Button).Text, String))
                 Dim tableWidth As Double = CType(CType(sender, System.Windows.Forms.Button).Width, Double)
                 Dim tableHeight As Double = CType(CType(sender, System.Windows.Forms.Button).Height, Double)
@@ -450,7 +426,6 @@ Public Class frmTableManagement
                 End If
 
                 If inEditMode = True Then
-
                     If tableName.Contains(",") Then
                         MsgBox("Unable to edit. Selected Table is currently joined to other table(s)!" & vbCrLf & _
                                "Detached this table first before editing.", MsgBoxStyle.Exclamation, "Message")
@@ -475,19 +450,14 @@ Public Class frmTableManagement
                         .btnAdd.Text = "Change"
                         .ShowDialog()
                     End With
-
                 End If
-
             Else
-
                 If inEditMode = True Then
                     X = Control.MousePosition.X - CType(sender, System.Windows.Forms.Button).Location.X
                     Y = Control.MousePosition.Y - CType(sender, System.Windows.Forms.Button).Location.Y
                     Label2.Text = "Start Location - Button = X: " & CType(sender, System.Windows.Forms.Button).Location.X & " | Y: " & CType(sender, System.Windows.Forms.Button).Location.Y
                 End If
-
             End If
-
         Catch ex As Exception
             MsgBox(ex.Message, MsgBoxStyle.Critical, "Message")
         End Try
@@ -502,7 +472,6 @@ Public Class frmTableManagement
     Private Sub TableButton_MouseMove(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs)
         If inEditMode = True Then
             If e.Button = Windows.Forms.MouseButtons.Left Then
-
                 isDrag = True
                 CType(sender, System.Windows.Forms.Button).Cursor = Cursors.SizeAll
                 point = Control.MousePosition
@@ -563,9 +532,7 @@ Public Class frmTableManagement
                     Panel1.BackgroundImageLayout = ImageLayout.Stretch
                     str.Close()
                 End Using
-
             End If
-
             Panel1.Visible = True
         Catch ex As Exception
             MsgBox(ex.Message, MsgBoxStyle.Critical, "Message")
@@ -573,7 +540,6 @@ Public Class frmTableManagement
     End Sub
 
     Public Sub EnableEditControl(ByVal opt As Boolean)
-
         firstArea = ""
         btnAddArea.Visible = opt
         btnAddArea.Enabled = opt
@@ -591,7 +557,6 @@ Public Class frmTableManagement
         Else
             opt2 = True
         End If
-
 
         Dim ctrl As Control = Nothing
         For i As Integer = Me.Panel1.Controls.Count - 1 To 0
@@ -617,5 +582,4 @@ Public Class frmTableManagement
 
         Me.btnEditMode.Enabled = True
     End Sub
-
 End Class

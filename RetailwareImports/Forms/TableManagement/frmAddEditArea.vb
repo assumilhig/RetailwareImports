@@ -14,7 +14,6 @@ Public Class frmAddEditArea
     Dim areaLayoutTempPath As String = LayoutPath & "\Area\Temp"
 
     Private Sub frmAddEditArea_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-
         Try
             If My.Computer.FileSystem.DirectoryExists(areaLayoutPath) = False Then
                 My.Computer.FileSystem.CreateDirectory(areaLayoutPath)
@@ -89,7 +88,6 @@ Public Class frmAddEditArea
                 rsArea.Open(sSQL, cnn, ADODB.CursorTypeEnum.adOpenStatic, ADODB.LockTypeEnum.adLockReadOnly)
 
                 If btnAdd.Text = "Add" Then
-
                     If Not rsArea.EOF Then
                         MsgBox("Area Name already exist! Please use another name.", MsgBoxStyle.Exclamation, "Validation")
                         Exit Sub
@@ -124,9 +122,7 @@ Public Class frmAddEditArea
                     cnn.Execute(sSQL)
 
                     frmTableManagement.CreateAreaButton(toControlName)
-
                 Else
-
                     If Not fromControlName = toControlName Then
                         If Not rsArea.EOF Then
                             MsgBox("Area Name already exist! Please use another name.", MsgBoxStyle.Exclamation, "Validation")
@@ -171,9 +167,7 @@ Public Class frmAddEditArea
 
                         sSQL = "UPDATE TM_Areas SET Name = '" & toControlName & "', LayoutPath = '" & toControlLayout & "' WHERE ID = '" & controlID & "'"
                         cnn.Execute(sSQL)
-
                     ElseIf changeLayout = True Then
-
                         If rsCheck.EOF Then
                             sSQL = "INSERT INTO TM_UpdateControls (AreaID, FromLayoutPath, ToLayoutPath, UserID) VALUES " & _
                                     "('" & controlID & "', '" & fromControlLayout & "', '" & toControlLayout & "', '99')"
@@ -184,9 +178,7 @@ Public Class frmAddEditArea
 
                         sSQL = "UPDATE TM_Areas SET LayoutPath = '" & toControlLayout & "' WHERE ID = '" & controlID & "'"
                         cnn.Execute(sSQL)
-
                     ElseIf changeName = True Then
-
                         If rsCheck.EOF Then
                             sSQL = "INSERT INTO TM_UpdateControls (AreaID, FromControlName, ToControlName, UserID) VALUES " & _
                                     "('" & controlID & "', '" & fromControlName & "', '" & toControlName & "', '99')"
@@ -197,7 +189,6 @@ Public Class frmAddEditArea
 
                         sSQL = "UPDATE TM_Areas SET Name = '" & toControlName & "' WHERE ID = '" & controlID & "'"
                         cnn.Execute(sSQL)
-
                     End If
 
                     If chInactive.Checked = True Then
@@ -224,9 +215,7 @@ Public Class frmAddEditArea
 
                 frmTableManagement.SelectArea(toControlName)
             Next
-
             Me.Dispose()
-
         Catch ex As Exception
             MsgBox(ex.Message, MsgBoxStyle.Critical, "Message")
         End Try

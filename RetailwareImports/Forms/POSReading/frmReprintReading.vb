@@ -4,9 +4,7 @@ Public Class frmReprintReading
 
     Dim rsLoadreading As New ADODB.Recordset
     Public Reprint As Boolean = True
-
     Public Type, RegisterNo As String
-
     Public sDateFrom, sToDate As String
 
     Delegate Sub SetProgressBar_Delegate(ByVal [ProgressBar] As ProgressBar, ByVal [RecordCount] As Integer, ByVal [Count] As Long)
@@ -50,7 +48,6 @@ Public Class frmReprintReading
                 .Columns("DateTime").Width = 150
                 .Columns("CashierID").Visible = False
             End With
-
         ElseIf Trim(ComboBox1.Text) = "Register Reading" Then
             sSQL = "Select RegisterNo,FullName as Cashier,DateTime,CashierID from Accountability a left outer join users b on a.cashierid = b.id where registerno = '" & Trim(TextBox1.Text) & "' and Reading = 'Register' and Convert(char(8),datetime,112) between '" & sDateFrom & "' and '" & sToDate & "' and ReadingFlag = 1 ORDER BY datetime"
             If rsLoadreading.State = 1 Then rsLoadreading.Close()
@@ -63,7 +60,6 @@ Public Class frmReprintReading
                 .Columns("DateTime").Width = 150
                 .Columns("CashierID").Visible = False
             End With
-
         ElseIf Trim(ComboBox1.Text) = "Z-Reading" Then
             sSQL = "Select RegisterNo,DBTimeStamp as Datetime,Fullname as Performedby,Status,TransNo_Start,TransNo_End,ControlNo,CashierID from Series a left outer join Users b on a.CashierID = b.id where Registerno = '" & Trim(TextBox1.Text) & "' and Convert(char(8),dbtimestamp,112) between '" & sDateFrom & "' and '" & sToDate & "' and Status = 'Close' ORDER BY dbtimestamp"
             If rsLoadreading.State = 1 Then rsLoadreading.Close()
@@ -126,9 +122,7 @@ Public Class frmReprintReading
                     rsBCP.MoveNext()
                 End While
             End If
-
             io.Close()
-
         Catch ex As Exception
             MsgBox(ex.Message, MsgBoxStyle.Exclamation, "Message")
         End Try
@@ -176,9 +170,7 @@ Public Class frmReprintReading
 
                     rsReading.MoveNext()
                 End While
-
                 MsgBox("Finished extracting of Cashier Reading")
-
             Catch ex As Exception
                 MsgBox(ex.Message, MsgBoxStyle.Exclamation, "Message")
             End Try
@@ -210,13 +202,10 @@ Public Class frmReprintReading
 
                     rsReading.MoveNext()
                 End While
-
                 MsgBox("Finished extracting of Register Reading")
-
             Catch ex As Exception
                 MsgBox(ex.Message, MsgBoxStyle.Exclamation, "Message")
             End Try
-
         ElseIf Type = "Z-Reading" Then
             sSQL = "Select * from Series where RegisterNo = '" & RegisterNo & "' and CONVERT(char(8),DBTimeStamp,112) between '" & sDateFrom & "' and '" & sToDate & "' ORDER BY DBTimeStamp"
             If rsReading.State = 1 Then rsReading.Close()
@@ -244,7 +233,6 @@ Public Class frmReprintReading
 
                     rsReading.MoveNext()
                 End While
-
                 MsgBox("Finished extracting of ZReading")
             Catch ex As Exception
                 MsgBox(ex.Message, MsgBoxStyle.Exclamation, "Message")

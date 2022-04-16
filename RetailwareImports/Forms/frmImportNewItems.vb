@@ -5,7 +5,6 @@ Public Class frmImportNewItems
     Public sSql As String
 
     Private Sub frmImportNewItems_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-
         Me.Text = String.Format("Import New Items - Utility - {0} Version {1}", My.Application.Info.ProductName, My.Application.Info.Version.ToString)
 
         Try
@@ -107,7 +106,6 @@ Public Class frmImportNewItems
                 My.Computer.FileSystem.DeleteFile(importFile)
 
                 ValidateNewItems()
-
             End If
         Catch ex As Exception
             MsgBox(ex.Message, MsgBoxStyle.Exclamation, "Message")
@@ -130,7 +128,6 @@ Public Class frmImportNewItems
     End Sub
 
     Private Sub txtSearch_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtSearch.KeyPress
-
         Dim KeyAscii As Short = Asc(e.KeyChar)
 
         If KeyAscii = 13 Then
@@ -198,7 +195,6 @@ Public Class frmImportNewItems
 
     Private Sub LoadImportNewItems(ByVal Search As String)
         Try
-
             If Trim(Search) = "" Then
                 sSql = "SELECT * FROM ImportNewItems ORDER BY ID"
             Else
@@ -226,7 +222,6 @@ Public Class frmImportNewItems
     End Sub
 
     Private Sub LoadProductStructure()
-
         loadDepartment()
         loadCategory("")
         loadSubCategory("")
@@ -357,7 +352,6 @@ Public Class frmImportNewItems
     End Sub
 
     Private Sub LinkLabel3_LinkClicked(ByVal sender As System.Object, ByVal e As System.Windows.Forms.LinkLabelLinkClickedEventArgs) Handles LinkLabel3.LinkClicked
-
         If LinkLabel3.Text = "Edit" Then
             LinkLabel3.Text = "Update"
             LinkLabel3.Location = New Point(1101, 576)
@@ -533,7 +527,6 @@ Public Class frmImportNewItems
 
     Private Sub DataGridView2_CellClick(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles DataGridView2.CellClick
         Try
-
             Dim ResultDesc As String
 
             ResultDesc = Trim(DataGridView2.Rows(DataGridView2.CurrentRow.Index).Cells(2).Value.ToString())
@@ -546,7 +539,6 @@ Public Class frmImportNewItems
 
     Private Sub DataGridView3_CellClick(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles DataGridView3.CellClick
         Try
-
             Dim ResultDesc As String
 
             ResultDesc = Trim(DataGridView3.Rows(DataGridView3.CurrentRow.Index).Cells(2).Value.ToString())
